@@ -5,6 +5,14 @@ class LucasNumber
         generate(count)
     end
 
+    def [](n)
+        @lucas_numbers[n]
+    end
+
+    def index(n)
+        @lucas_numbers.index(n)
+    end
+
     private 
 
     def generate(count)
