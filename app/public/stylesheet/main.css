@@ -1,0 +1,36 @@
+body {
+  margin: 0;
+}
+
+a.title-anchor, a.title-anchor:visited {
+  color: white;
+  text-decoration: none;
+}
+
+#main-content {
+  width: 80%;
+  margin-top: 14px;
+  margin-left: auto;
+  margin-right: auto;
+  position: relative;
+}
+
+.sequence {
+  font-size: 1.1em;
+}
+
+.button-area {
+  position: relative;
+  margin-right: auto;
+  margin-left: auto;
+  display: flex;
+  flex-flow: column;
+}
+
+.button-area > *{
+  margin-top: 12px;
+}
+
+.answer-input {
+  width: 120px;
+}
