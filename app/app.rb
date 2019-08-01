@@ -17,7 +17,7 @@ class Suretsu < Sinatra::Base
   end
 
   # @nowが0のとき
-  get '/:index' do
+  get '/:index' dols
     @now = LUCA.index(params[:index].to_i)
     pass unless @now == 0
     

@@ -2,37 +2,38 @@
 <div class="sequence">
   <math display="block">
     <mfenced open="" close="">
-    <mrow>
-      <mi>a</mi>
-    </mrow>
-    <mrow>
-      <mi>a</mi> 
-      <mo>&#x2062;<!--INVISIBLE TIMES--></mo>
-      <mi>r</mi>
-    </mrow>
-    <mrow>
-      <mi>a</mi> 
-      <mo>&#x2062;<!--INVISIBLE TIMES--></mo>
-      <msup>
+      <mrow>
+        <mi>a</mi>
+      </mrow>
+      <mrow>
+        <mi>a</mi> 
+        <mo>&#x2062;<!--INVISIBLE TIMES--></mo>
         <mi>r</mi>
-        <mn>2</mn>
-      </msup>
-    </mrow>
-    <%= @seq.map { |i| "<mrow><mn>#{i}</mn></mrow>"}.join %> 
-    <mrow>
-      <mi>&ctdot;</mi> 
-    </mrow>
-    <mrow>
-      <mi>a</mi>
-      <mo>&#x2062;<!--INVISIBLE TIMES--></mo>
-      <msup>
-        <mi>r</mi>
-        <mi>n</mi>
-      </msup>
-    </mrow>
-    <mrow>
-      <mi>&ctdot;</mi> 
-    </mrow>
+      </mrow>
+      <mrow>
+        <mi>a</mi> 
+        <mo>&#x2062;<!--INVISIBLE TIMES--></mo>
+        <msup>
+          <mi>r</mi>
+          <mn>2</mn>
+        </msup>
+      </mrow>
+      <%= @seq.map { |i| "<mrow><mn>#{i}</mn></mrow>"}.join %> 
+      <mrow>
+        <mi>&ctdot;</mi> 
+      </mrow>
+      <mrow>
+        <mi>a</mi>
+        <mo>&#x2062;<!--INVISIBLE TIMES--></mo>
+        <msup>
+          <mi>r</mi>
+          <mi>n</mi>
+        </msup>
+      </mrow>
+      <mrow>
+        <mi>&ctdot;</mi> 
+      </mrow>
+    </mfenced>
   </math>
 </div>
 
@@ -59,5 +60,5 @@
     </div>
   </span>
 
-  <input type="submit" class="mdc-button mdc-button--outlined"></button>
+  <input type="submit" class="mdc-button mdc-button--outlined" />
 </form>
