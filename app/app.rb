@@ -17,7 +17,7 @@ class Suretsu < Sinatra::Base
   end
 
   # @nowが0のとき
-  get '/:index' dols
+  get '/:index' do
     @now = LUCA.index(params[:index].to_i)
     pass unless @now == 0
     
@@ -59,7 +59,7 @@ class Suretsu < Sinatra::Base
   # 100問解いた場合
   get '/:index' do
     pass unless LUCA.index(params[:index].to_i) == 99
-    'congraturate'
+    erb :congraturate
   end
 
   get '/:index' do
