@@ -16,18 +16,12 @@ class Suretsu < Sinatra::Base
     erb :top
   end
 
-  get '/:index' do
-    pass if params[:a].nil? || params[:r].nil?
-    pass unless LUCA.index(params[:index].to_i) == 99 && params[:a] == cookies[:a] && params[:r] == cookies[:r] 
-    'congraturate'
-  end
-
+  # @nowが0のとき
   get '/:index' do
     @now = LUCA.index(params[:index].to_i)
-
-    pass unless @now
-    pass if @now != 0 && (params[:a].nil? || params[:r].nil?)
-    pass unless (params[:a].to_i == cookies[:a].to_i && params[:r].to_i == cookies[:r].to_i) || @now == 0
+    pass unless @now == 0
+    
+    session[:start_time] = Time.now
     @next = LUCA[@now + 1]
     @seq, a, r = generate_new_suretsu
     cookies[:a] = a
@@ -35,15 +29,46 @@ class Suretsu < Sinatra::Base
     erb :quiz
   end
 
+  # 時間切れの場合
   get '/:index' do
-    pass unless LUCA.index(params[:index].to_i)
+    st = session[:start_time]
+    nt = Time.now
+
+    pass if nt <= (st + 180)
+    @message = '時間切れです。3分以内に解いてください'
+    erb :error
+  end
+
+  # 不正なページ遷移時
+  get '/:index' do
+    pass if LUCA.index(params[:index].to_i)
+    pass unless params[:a].nil? || params[:r].nil?
+
+    @message = '不正なページ遷移です'
+    erb :error
+  end
+
+  # 不正解の場合
+  get '/:index' do
+    pass if params[:a] == cookies[:a] && params[:r] == cookies[:r] 
+    
     @message = '不正解です'
     erb :error
   end
 
+  # 100問解いた場合
   get '/:index' do
-    @message = '不正なページ遷移です'
-    erb :error
+    pass unless LUCA.index(params[:index].to_i) == 99
+    'congraturate'
+  end
+
+  get '/:index' do
+    @now = LUCA.index(params[:index].to_i)
+    @next = LUCA[@now + 1]
+    @seq, a, r = generate_new_suretsu
+    cookies[:a] = a
+    cookies[:r] = r
+    erb :quiz
   end
 
   private 
