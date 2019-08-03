@@ -5,11 +5,11 @@ services:
       context: ./app
     expose:
       - '9292'
-    depends_on:
-      - nginx
   nginx:
     image: nginx
     ports:
       - '80:80'
     volumes:
       - ./nginx/nginx.conf:/etc/nginx/nginx.conf
+    depends_on:
+      - app

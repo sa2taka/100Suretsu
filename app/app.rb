@@ -20,7 +20,7 @@ class Suretsu < Sinatra::Base
   get '/:index' do
     @now = LUCA.index(params[:index].to_i)
     pass unless @now == 0
-    
+
     session[:start_time] = Time.now
     @next = LUCA[@now + 1]
     @seq, a, r = generate_new_suretsu
@@ -34,7 +34,7 @@ class Suretsu < Sinatra::Base
     st = session[:start_time]
     nt = Time.now
 
-    pass if nt <= (st + 180)
+    pass if st.nil? || nt <= (st + 180)
     @message = '時間切れです。3分以内に解いてください'
     erb :error
   end
@@ -50,8 +50,8 @@ class Suretsu < Sinatra::Base
 
   # 不正解の場合
   get '/:index' do
-    pass if params[:a] == cookies[:a] && params[:r] == cookies[:r] 
-    
+    pass if params[:a] == cookies[:a] && params[:r] == cookies[:r]
+
     @message = '不正解です'
     erb :error
   end
@@ -71,7 +71,7 @@ class Suretsu < Sinatra::Base
     erb :quiz
   end
 
-  private 
+  private
   def generate_new_suretsu
     a = Random.rand(1..50)
     r = 0
