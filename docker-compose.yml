@@ -5,6 +5,8 @@ services:
       context: ./app
     expose:
       - '9292'
+    environment:
+      - flag=flag{Luc4s_cann0t_shoot_PK_St4rst0rm}
   nginx:
     image: nginx
     ports:
