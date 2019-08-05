@@ -58,7 +58,7 @@ class Suretsu < Sinatra::Base
 
   # 100問解いた場合
   get '/:index' do
-    pass unless LUCA.index(params[:index].to_i) == 99
+    pass unless LUCA.index(params[:index].to_i) == 100
     erb :congraturate
   end
 
