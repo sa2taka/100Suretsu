@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 require 'rubygems'
 require 'sinatra'
 require 'sinatra/base'
@@ -14,6 +16,10 @@ class Suretsu < Sinatra::Base
 
   get '/' do
     erb :top
+  end
+
+  get '/access_denided' do
+    erb :access_denided
   end
 
   # @nowが0のとき
