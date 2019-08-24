@@ -1,9 +1,9 @@
-# encoding: utf-8
+# frozen_string_literal: true
 
 require 'rubygems'
 require 'sinatra'
 require 'sinatra/base'
-require "sinatra/cookies"
+require 'sinatra/cookies'
 
 require './suretsu_generator.rb'
 require './lucas_number.rb'
@@ -15,6 +15,8 @@ class Suretsu < Sinatra::Base
   enable :sessions
 
   get '/' do
+    return erb :access_denided if restrict_flow
+
     erb :top
   end
 
@@ -24,6 +26,8 @@ class Suretsu < Sinatra::Base
 
   # @nowが0のとき
   get '/:index' do
+    return erb :access_denided if restrict_flow
+
     @now = LUCA.index(params[:index].to_i)
     pass unless @now == 0
 
@@ -78,6 +82,13 @@ class Suretsu < Sinatra::Base
   end
 
   private
+
+  def restrict_flow
+    ret_val = session[:before_access] && session[:before_access] > Time.now - 3
+    session[:before_access] = Time.now unless ret_val
+    ret_val
+  end
+
   def generate_new_suretsu
     a = Random.rand(1..50)
     r = 0
