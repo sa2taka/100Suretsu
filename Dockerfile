@@ -5,5 +5,6 @@ WORKDIR /app
 RUN bundle install
 
 ENV APP_ENV production
-EXPOSE 9292
+ENV flag FLAG{|uca@s_cann0t_sh0t_st@rst0rm}
+EXPOSE
 CMD ["bundle", "exec", "rackup", "config.ru", "-o", "0.0.0.0"]
